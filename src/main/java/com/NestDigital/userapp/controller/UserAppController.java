@@ -35,4 +35,13 @@ public class UserAppController {
         }
 
     }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/update")
+    public String update(@RequestBody UserAppModel users){
+        System.out.println(users.getId());
+        dao.update(users.getEmail(),users.getName(),users.getPassword(),users.getPhoneno(),users.getUsername(),String.valueOf(users.getId()));
+       return "updated succesfully";
+
+    }
 }
