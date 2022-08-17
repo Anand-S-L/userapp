@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class UserAppController {
     @Autowired
@@ -18,5 +20,13 @@ public class UserAppController {
     public  String adduser(@RequestBody UserAppModel users){
         dao.save(users);
         return "users added successfully";
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/login")
+    public List<UserAppModel> login(@RequestBody UserAppModel user){
+        String username=user.getUsername();
+        String password=user.getPassword();
+        return dao.login(username,password);
     }
 }
