@@ -24,9 +24,15 @@ public class UserAppController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
-    public List<UserAppModel> login(@RequestBody UserAppModel user){
+    public Boolean login(@RequestBody UserAppModel user){
         String username=user.getUsername();
         String password=user.getPassword();
-        return dao.login(username,password);
+        if( dao.login(username,password).size()==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 }
